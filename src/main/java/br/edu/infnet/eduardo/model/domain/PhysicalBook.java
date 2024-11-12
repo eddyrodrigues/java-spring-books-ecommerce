@@ -1,6 +1,9 @@
 package br.edu.infnet.eduardo.model.domain;
 
-public class PhysicalBook extends Book{
+import jakarta.persistence.Entity;
+
+@Entity
+public class PhysicalBook extends Book {
 
     private String weight;
     @Override

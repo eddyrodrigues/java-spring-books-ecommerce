@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "e6279589-86f4-4937-9932-e1e55a77111b",
+		"name": "Arquitetura Java",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "30936546"
+	},
+	"item": [
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "customers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/customers"
+					},
+					"response": []
+				},
+				{
+					"name": "customers/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/customers/1"
+					},
+					"response": []
+				},
+				{
+					"name": "customers/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/customers/2"
+					},
+					"response": []
+				},
+				{
+					"name": "customers/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\": 1,\r\n    \"name\": 2,\r\n    \"Address\": {\r\n        \"rua\": \"rua das ssss\",\r\n        \"estado\": \"IN\"\r\n    },\r\n    \"BoughtEbooks\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"nome1\",\r\n            \"author\": null,\r\n            \"description\": \"description1\",\r\n            \"active\": true,\r\n            \"price\": 1300.0,\r\n            \"visualizationLink\": \"https://\"\r\n        }\r\n    ],\r\n    \"BoughtPhysicalBooks\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/customers/1"
+					},
+					"response": []
+				},
+				{
+					"name": "customers/{id}",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\": 1,\r\n    \"name\": \"novo customer\",\r\n    \"Address\": {\r\n        \"rua\": \"rua das ssss\",\r\n        \"estado\": \"IN\"\r\n    },\r\n    \"BoughtEbooks\": [],\r\n    \"BoughtPhysicalBooks\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/customers"
+					},
+					"response": []
+				},
+				{
+					"name": "customers/{id} Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\": 1,\r\n    \"name\": \"novo customer\",\r\n    \"Address\": {\r\n        \"rua\": \"rua das ssss\",\r\n        \"estado\": \"IN\"\r\n    },\r\n    \"BoughtEbooks\": [],\r\n    \"BoughtPhysicalBooks\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/customers/{customerId}/comprar-livro/{bookId}"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "books",
+			"item": [
+				{
+					"name": "all-books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/books/all-books"
+					},
+					"response": []
+				},
+				{
+					"name": "physical-books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/books/physical-books"
+					},
+					"response": []
+				},
+				{
+					"name": "e-books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/books/e-books"
+					},
+					"response": []
+				},
+				{
+					"name": "books/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/books/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"books",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "books/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/books/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"books",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar/{nome}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/books/buscar/:nome",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"books",
+								"buscar",
+								":nome"
+							],
+							"variable": [
+								{
+									"key": "nome",
+									"value": "nome"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

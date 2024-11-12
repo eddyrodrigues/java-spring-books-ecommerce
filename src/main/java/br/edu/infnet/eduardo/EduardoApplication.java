@@ -8,6 +8,7 @@ public class EduardoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EduardoApplication.class, args);
+		new Loader().loadData();
 	}
 
 }

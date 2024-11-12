@@ -1,16 +1,31 @@
 package br.edu.infnet.eduardo.model.domain;
 
-import jdk.jshell.spi.ExecutionControl;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "TLivro")
 public abstract class Book {
-    private String name;
-    private String author;
-    private String description;
-    private Boolean active;
-    protected float price;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    protected Integer id;
+    protected String name;
+    protected String author;
+    protected String description;
+    protected Boolean active;
+    protected Float price;
 
-    public float GetPrice() throws ExecutionControl.NotImplementedException {
-        throw new ExecutionControl.NotImplementedException("GetPrice was not defined");
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+
+    public Integer getId()
+    {
+        return id;
+    }
+    public float GetPrice() {
+        return 0f;
     }
 
     public String getName() {

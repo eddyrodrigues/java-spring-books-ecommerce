@@ -1,10 +1,13 @@
 package br.edu.infnet.eduardo.model.domain;
 
-public class Ebook extends Book{
-    private String visualizationLink;
+import jakarta.persistence.Entity;
 
-    @Override
-    public float GetPrice()
+@Entity
+public class Ebook extends Book{
+    protected String visualizationLink;
+
+//    @Override
+    public Float getPrice()
     {
         return this.price * 1.3f;
     }
