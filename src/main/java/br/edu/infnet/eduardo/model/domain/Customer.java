@@ -23,16 +23,19 @@ public class Customer {
     @JoinColumn(name="idEndereco")
     private Address Address;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "idCustomer")
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "idCustomer")
+    @JoinTable(name = "customerBooks3", joinColumns = @JoinColumn(name = "BOOKID3"))
     private List<Book> BoughtBook = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "idCustomer")
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "idCustomer")
+    @JoinTable(name = "customerBooks2", joinColumns = @JoinColumn(name = "BOOKID2"))
     private List<Ebook> BoughtEbooks = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "idCustomer")
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "idCustomer")
+    @JoinTable(name = "customerBooks1", joinColumns = @JoinColumn(name = "BOOKID1") )
     private List<PhysicalBook> BoughtPhysicalBooks = new ArrayList<>();
 
     public List<Ebook> getBoughtEBooks() {

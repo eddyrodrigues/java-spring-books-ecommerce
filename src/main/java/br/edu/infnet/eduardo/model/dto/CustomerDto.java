@@ -14,7 +14,7 @@ public class CustomerDto {
     {
         Id = customer.getId();
         name = customer.getName();
-        Address = customer.getAddress();
+        Address = new AddressDto(customer.getAddress());
         for (int i = 0; i < customer.getBoughtEBooks().size(); i++) {
             BoughtEbooks.add(new EbookDto(customer.getBoughtEBooks().get(i)));
         }
@@ -28,7 +28,8 @@ public class CustomerDto {
     @NotNull(message = "O nome não pode ser nulo")
     public String name;
 
-    public br.edu.infnet.eduardo.model.domain.Address Address;
+
+    public AddressDto Address;
 
     public List<EbookDto> BoughtEbooks = new ArrayList<>();
 

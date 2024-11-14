@@ -1,11 +1,10 @@
 package br.edu.infnet.eduardo.controller;
 
-import br.edu.infnet.eduardo.model.domain.Address;
-import br.edu.infnet.eduardo.model.domain.Book;
-import br.edu.infnet.eduardo.model.domain.Customer;
+import br.edu.infnet.eduardo.model.domain.*;
 import br.edu.infnet.eduardo.model.dto.CustomerDto;
 import br.edu.infnet.eduardo.model.repository.IBookRepository;
 import br.edu.infnet.eduardo.model.repository.ICustomerRepository;
+import br.edu.infnet.eduardo.service.apiCepService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,8 @@ public class CustomerController {
 
     @Autowired
     private IBookRepository bookRepository;
-
+    @Autowired
+    private apiCepService cepService;
 
 
     @GetMapping
@@ -99,6 +99,7 @@ public class CustomerController {
         {
             return ResponseEntity.badRequest().build();
         }
+
         var customer = customerRepository.findById(customerDto.Id);
 
         if (customer.isEmpty()) {
@@ -108,9 +109,12 @@ public class CustomerController {
         var editableCustomer = customer.get();
 
         editableCustomer.setName(customerDto.name);
+
+
+
         var addr = editableCustomer.getAddress();
-        addr.setEstado(customerDto.Address.getEstado());
-        addr.setRua(customerDto.Address.getRua());
+//        addr.setEstado(customerDto.Address.getEstado());
+//        addr.setRua(customerDto.Address.getRua());
 
         customerRepository.save(editableCustomer);
 
@@ -128,9 +132,21 @@ public class CustomerController {
         var editableCustomer = new Customer();
 
         editableCustomer.setName(customerDto.name);
-        var addr = new Address();
-        addr.setEstado(customerDto.Address.getEstado());
-        addr.setRua(customerDto.Address.getRua());
+
+        // consultar CEP
+
+        var viaCepAddr = cepService.GetAddressByCep(customerDto.Address.cep);
+
+        if (viaCepAddr == null)
+        {
+            return ResponseEntity.status(400).body("Cep inválido");
+        }
+
+
+        Address addr = new Address();
+        addr.setEstado(viaCepAddr.uf);
+        addr.setRua(viaCepAddr.logradouro);
+        addr.setCep(viaCepAddr.cep);
         editableCustomer.setAddress(addr);
 
         customerRepository.save(editableCustomer);
@@ -155,6 +171,15 @@ public class CustomerController {
             return ResponseEntity.status(404).body("livro não encontrado");
         }
 
+        if (book.getClass() == PhysicalBook.class)
+        {
+            customer.getBoughtPhysicalBooks().add((PhysicalBook)book);
+        } else if (book.getClass() == Ebook.class)
+        {
+            customer.getBoughtEBooks().add((Ebook)book);
+        } else {
+            customer.getBoughtBook().add(book);
+        }
         customer.getBoughtBook().add(book);
 
         customerRepository.save(customer);
